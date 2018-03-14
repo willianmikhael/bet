@@ -38,6 +38,10 @@
 			</tbody>
 		</table>
 		
+		<c:if test="${not empty mensagem}">
+			<div class="alert alert-success">${mensagem}</div>
+		</c:if>
+		
 	</div>
 </body>
 </html>
