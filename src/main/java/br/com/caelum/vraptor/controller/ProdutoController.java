@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.dao.ProdutoDao;
 import br.com.caelum.vraptor.model.Produto;
 import br.com.caelum.vraptor.util.JPAUtil;
+import br.com.caelum.vraptor.view.Results;
 
 @Controller
 public class ProdutoController {
@@ -49,6 +50,22 @@ public class ProdutoController {
 		ProdutoDao dao = new ProdutoDao(em);
 		
 		result.include("produtoList", dao.lista()); //passando lista para view
+	}
+	
+	@Get
+	public void listaEmXML() { //retornando a lista em xml
+		EntityManager em = JPAUtil.criaEntityManager();
+		ProdutoDao dao = new ProdutoDao(em);
+		
+		result.use(Results.xml()).from(dao.lista()).serialize();
+	}
+	
+	@Get
+	public void listaEmJson() { //retornando a lista em xml
+		EntityManager em = JPAUtil.criaEntityManager();
+		ProdutoDao dao = new ProdutoDao(em);
+		
+		result.use(Results.json()).from(dao.lista()).serialize();
 	}
 	
 	@Get
