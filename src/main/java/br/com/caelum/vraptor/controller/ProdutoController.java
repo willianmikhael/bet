@@ -66,6 +66,8 @@ public class ProdutoController {
 		ProdutoDao dao = new ProdutoDao(em);
 		
 		result.use(Results.json()).from(dao.lista()).serialize();
+		
+		result.use(Results.xml()).from(dao.lista()).exclude("quantidade").serialize(); // Devolve o Json sem o campo quantidade
 	}
 	
 	@Get
@@ -86,7 +88,7 @@ public class ProdutoController {
 		result.redirectTo(this).lista(); // encaminha para Lista
 	}
 	
-	@Delete
+	@Get
 	public void remove(Produto produto) {
 		EntityManager em = JPAUtil.criaEntityManager();
 		ProdutoDao produtoDao = new ProdutoDao(em);
@@ -94,5 +96,8 @@ public class ProdutoController {
 		em.getTransaction().begin();
 		produtoDao.remove(produto);
 		em.getTransaction().commit();
+		
+		result.include("mensagem", "Produto foi apagado com sucesso!");
+		result.redirectTo(this).lista();
 	}
 }
