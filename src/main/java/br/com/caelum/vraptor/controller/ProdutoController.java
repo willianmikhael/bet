@@ -18,6 +18,11 @@ public class ProdutoController {
 		
 	}
 	
+	@Path("/produto/sobre")
+	public void sobre() {
+		
+	}
+	
 	@Path("/produto/lista")
 	public List<Produto> lista() {
 		EntityManager em = JPAUtil.criaEntityManager();
