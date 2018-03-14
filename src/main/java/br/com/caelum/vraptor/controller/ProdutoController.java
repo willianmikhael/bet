@@ -45,4 +45,14 @@ public class ProdutoController {
 		produtoDao.adiciona(produto);
 		em.getTransaction().commit();
 	}
+	
+	@Path("/produto/remove")
+	public void remove(Produto produto) {
+		EntityManager em = JPAUtil.criaEntityManager();
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		
+		em.getTransaction().begin();
+		produtoDao.remove(produto);
+		em.getTransaction().commit();
+	}
 }
