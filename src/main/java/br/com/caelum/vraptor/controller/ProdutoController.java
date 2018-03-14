@@ -44,11 +44,11 @@ public class ProdutoController {
 	}
 	
 	@Get
-	public List<Produto> lista() {
+	public void lista() {
 		EntityManager em = JPAUtil.criaEntityManager();
 		ProdutoDao dao = new ProdutoDao(em);
 		
-		return dao.lista();
+		result.include("produtoList", dao.lista()); //passando lista para view
 	}
 	
 	@Get
