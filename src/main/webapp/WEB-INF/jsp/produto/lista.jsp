@@ -9,30 +9,35 @@
 <title>Listagem de Produtos</title>
 </head>
 <body>
-	<h1>Listagem de Produtos</h1>
-	
-	<table class="table table-stripped table-hover table-bordered">
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Valor</th>
-				<th>Quantidade</th>
-			</tr>
-		</thead>
-		<tbody>
+	<div class="container">
+		<h1>Listagem de Produtos</h1>
 		
-		<c:forEach items="${produtoList}" var="produto">
-			<tr>
-				<td>${produto.nome}</td>
-				<td>${produto.valor}</td>
-				<td>${produto.quantidade}</td>
-				<td>
-  					<a href="<c:url value='/produto/remove?produto.id=${produto.id}'/>">Remover</a>
-				</td>
-			</tr>
-		</c:forEach>
-			
-		</tbody>
-	</table>
+		<table class="table table-stripped table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Valor</th>
+					<th>Quantidade</th>
+				</tr>
+			</thead>
+			<tbody>
+	
+				<a href="<c:url value='/produto/formulario'/>">Adicionar mais produtos!</a>
+		
+				<c:forEach items="${produtoList}" var="produto">
+					<tr>
+						<td>${produto.nome}</td>
+						<td>${produto.valor}</td>
+						<td>${produto.quantidade}</td>
+						<td>
+		  					<a href="<c:url value='/produto/remove?produto.id=${produto.id}'/>">Remover</a>
+						</td>
+					</tr>
+				</c:forEach>			
+				
+			</tbody>
+		</table>
+		
+	</div>
 </body>
 </html>
