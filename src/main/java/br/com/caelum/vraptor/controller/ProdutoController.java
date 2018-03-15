@@ -14,6 +14,9 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.dao.ProdutoDao;
 import br.com.caelum.vraptor.model.Produto;
 import br.com.caelum.vraptor.util.JPAUtil;
+import br.com.caelum.vraptor.validator.I18nMessage;
+import br.com.caelum.vraptor.validator.SimpleMessage;
+import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
 
 @Controller
@@ -24,15 +27,17 @@ public class ProdutoController {
 	
 	private final Result result; //usado para redirecionar usuario e adicionar parametros para view
 	private final ProdutoDao dao;
+	private final Validator validator;
 
 	@Inject
-	public ProdutoController(Result result, ProdutoDao dao) {
+	public ProdutoController(Result result, ProdutoDao dao, Validator validator) {
 	    this.result = result;
 	    this.dao = dao;
+	    this.validator = validator;
 	}
 	
 	public ProdutoController() { //necessario criar um construtor sem argumentos
-		this(null,null);
+		this(null,null,null);
 	}
 
 
@@ -70,6 +75,11 @@ public class ProdutoController {
 	
 	@Post
 	public void adiciona(Produto produto) {
+		
+		validator.check(produto.getQuantidade() > 0, 
+				new I18nMessage("erro", "produto.quantidade.negativa")); // a chave produto.quantidade.negativa esta referenciando uma mensagem no arquivo src/main/resources/messages.properties
+		
+		validator.onErrorUsePageOf(this).formulario(); // direciona devolta ao formulario caso erro OBS: no lugar do this poderiamos botar também OutraClasse.class
 		
 		dao.adiciona(produto);
 	
