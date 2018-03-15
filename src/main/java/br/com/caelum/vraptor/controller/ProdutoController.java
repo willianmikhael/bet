@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.validation.Valid;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
@@ -74,10 +75,13 @@ public class ProdutoController {
 	}
 	
 	@Post
-	public void adiciona(Produto produto) {
+	public void adiciona(@Valid Produto produto) {
 		
-		validator.check(produto.getQuantidade() > 0, 
-				new I18nMessage("erro", "produto.quantidade.negativa")); // a chave produto.quantidade.negativa esta referenciando uma mensagem no arquivo src/main/resources/messages.properties
+		
+		
+		//validação personalizada
+		validator.check(produto.getQuantidade() < 100, 
+				new I18nMessage("erro", "produto.quantidade.excedida")); // a chave produto.quantidade.excedida esta referenciando uma mensagem no arquivo src/main/resources/messages.properties
 		
 		validator.onErrorUsePageOf(this).formulario(); // direciona devolta ao formulario caso erro OBS: no lugar do this poderiamos botar também OutraClasse.class
 		
