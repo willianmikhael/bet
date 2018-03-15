@@ -23,14 +23,16 @@ public class ProdutoController {
 
 	
 	private final Result result; //usado para redirecionar usuario e adicionar parametros para view
+	private final ProdutoDao dao;
 
 	@Inject
-	public ProdutoController(Result result) {
+	public ProdutoController(Result result, ProdutoDao dao) {
 	    this.result = result;
+	    this.dao = dao;
 	}
 	
 	public ProdutoController() { //necessario criar um construtor sem argumentos
-		this(null);
+		this(null,null);
 	}
 
 
@@ -46,28 +48,19 @@ public class ProdutoController {
 	
 	@Get
 	public void lista() {
-		EntityManager em = JPAUtil.criaEntityManager();
-		ProdutoDao dao = new ProdutoDao(em);
-		
 		result.include("produtoList", dao.lista()); //passando lista para view
 	}
 	
 	@Get
 	public void listaEmXML() { //retornando a lista em xml
-		EntityManager em = JPAUtil.criaEntityManager();
-		ProdutoDao dao = new ProdutoDao(em);
-		
 		result.use(Results.xml()).from(dao.lista()).serialize();
 	}
 	
 	@Get
 	public void listaEmJson() { //retornando a lista em xml
-		EntityManager em = JPAUtil.criaEntityManager();
-		ProdutoDao dao = new ProdutoDao(em);
-		
 		result.use(Results.json()).from(dao.lista()).serialize();
 		
-		result.use(Results.xml()).from(dao.lista()).exclude("quantidade").serialize(); // Devolve o Json sem o campo quantidade
+		//result.use(Results.xml()).from(dao.lista()).exclude("quantidade").serialize(); // Devolve o Json sem o campo quantidade
 	}
 	
 	@Get
@@ -77,25 +70,16 @@ public class ProdutoController {
 	
 	@Post
 	public void adiciona(Produto produto) {
-		EntityManager em = JPAUtil.criaEntityManager();
-		ProdutoDao produtoDao = new ProdutoDao(em);
 		
-		em.getTransaction().begin();
-		produtoDao.adiciona(produto);
-		em.getTransaction().commit();
-		
+		dao.adiciona(produto);
+	
 		result.include("mensagem","Produto adicionado com sucesso!");
 		result.redirectTo(this).lista(); // encaminha para Lista
 	}
 	
 	@Get
 	public void remove(Produto produto) {
-		EntityManager em = JPAUtil.criaEntityManager();
-		ProdutoDao produtoDao = new ProdutoDao(em);
-		
-		em.getTransaction().begin();
-		produtoDao.remove(produto);
-		em.getTransaction().commit();
+		dao.remove(produto);
 		
 		result.include("mensagem", "Produto foi apagado com sucesso!");
 		result.redirectTo(this).lista();
