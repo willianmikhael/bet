@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.Intercepts;
 import br.com.caelum.vraptor.annotation.Log;
 import br.com.caelum.vraptor.controller.ControllerMethod;
 
+@AcceptsWithAnnotations(Log.class) // somente irá interceptar quem tiver a anotation @Log
 @Intercepts
 public class LogInterceptor {
 
@@ -22,12 +23,6 @@ public class LogInterceptor {
     public LogInterceptor() {
         this(null); // para uso do CDI
     }
-	
-    
-    @Accepts
-    public boolean accepts() {
-    	return controllerMethod.containsAnnotation(Log.class); // somente irá interceptar quem tiver a anotation @Log
-	}
     
     //Antes de Executar o códito do método
     @BeforeCall
