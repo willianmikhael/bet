@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.annotation.Log;
 import br.com.caelum.vraptor.annotation.Public;
 import br.com.caelum.vraptor.dao.UsuarioDao;
 import br.com.caelum.vraptor.model.Usuario;
@@ -34,6 +35,7 @@ public class LoginController {
 	}
 	
 	@Public //Anotação que desenvolvemos para nao passar pelo interceptor
+	@Log // interceptor que desenvolvemos para mostrar o nome do metodo executado no console
 	@Get
 	public void formulario() {
 		
