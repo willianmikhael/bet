@@ -17,17 +17,19 @@ public class LoginController {
 	private final UsuarioDao dao;
 	private final Validator validator;
 	private final Result result;
+	private final UsuarioLogado usuarioLogado;
 
 	@Inject
-	public LoginController(UsuarioDao dao, Validator validator, Result result) {
+	public LoginController(UsuarioDao dao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
 		this.dao = dao;
 		this.validator = validator;
 		this.result = result;
+		this.usuarioLogado = usuarioLogado;
 	}
 	
 	@Deprecated
 	public LoginController() { //para uso do CDI
-		this(null,null,null);
+		this(null,null,null,null);
 	}
 	
 	@Get
@@ -41,6 +43,7 @@ public class LoginController {
 			validator.add(new I18nMessage("login", "login.invalido"));
 			validator.onErrorUsePageOf(this).formulario();
 		}
+		usuarioLogado.setUsuario(usuario);
 		result.redirectTo(ProdutoController.class).lista();
 	}
 	
