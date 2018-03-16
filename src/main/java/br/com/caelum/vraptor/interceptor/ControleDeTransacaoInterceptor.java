@@ -6,7 +6,10 @@ import javax.persistence.EntityManager;
 import br.com.caelum.vraptor.AroundCall;
 import br.com.caelum.vraptor.Intercepts;
 
-@Intercepts
+@Intercepts(after={
+	    AutorizadorInterceptor.class,  //define que o interceptor será executado depois do Autorizador
+	    LogInterceptor.class // e tambem depois do log
+	})
 public class ControleDeTransacaoInterceptor {
 
     private final EntityManager em;

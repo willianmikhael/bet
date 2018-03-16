@@ -9,7 +9,7 @@ import br.com.caelum.vraptor.annotation.Log;
 import br.com.caelum.vraptor.controller.ControllerMethod;
 
 @AcceptsWithAnnotations(Log.class) // somente irá interceptar quem tiver a anotation @Log
-@Intercepts
+@Intercepts(after=AutorizadorInterceptor.class)
 public class LogInterceptor {
 
 	
