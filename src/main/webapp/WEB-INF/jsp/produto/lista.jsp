@@ -32,6 +32,9 @@
 						<td>
 		  					<a href="<c:url value='/produto/remove?produto.id=${produto.id}'/>">Remover</a>
 						</td>
+						 <td>
+					        <a href="<c:url value='/produto/enviaPedidoDeNovosItens?produto.nome=${produto.nome}'/>">Pedir mais itens!</a>
+    					</td>
 					</tr>
 				</c:forEach>			
 				

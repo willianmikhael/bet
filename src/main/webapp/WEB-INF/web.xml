@@ -6,6 +6,7 @@
     <param-value>messages</param-value>
   </context-param>
   <context-param>
+  	<!-- É aqui que para o email ele irá procurar um arquivo chamado production.properties em src/main/resources -->
     <param-name>br.com.caelum.vraptor.environment</param-name>
     <param-value>production</param-value>
   </context-param>
