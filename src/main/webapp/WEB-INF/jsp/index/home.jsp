@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Pagina Inicial</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>Bem Vindo ao projeto de Produto</h1>
+	<h1>Você Conseguiu Projeto esta vazio!</h1>
 </body>
 </html>

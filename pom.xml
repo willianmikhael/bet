@@ -2,7 +2,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.caelum</groupId>
-	<artifactId>vraptor-produtos</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 
@@ -82,7 +81,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>vraptor-produtos</finalName>
+		<finalName>projetovraptor</finalName>
 		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
 		<plugins>
 			<plugin>
@@ -160,4 +159,5 @@
 		</plugins>
 	</build>
 
+	<artifactId>projetovraptor</artifactId>
 </project>
